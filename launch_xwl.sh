@@ -9,7 +9,7 @@ ORIGINAL_DIR="$(echo $PWD)"
 cd "/var/www/xwl.me/"
 
 # Launch with full paths and explanations
-/home/nacro/bin/venv/bin/gunicorn -w 5 -b 127.0.0.1:5010 hello:app --access-logfile /var/www/nacro/media/logs/xwl.me_access.log --error-logfile /var/www/nacro/media/logs/xwl.me_error.log
+/var/www/xwl.me/venv/bin/gunicorn -w 5 -b 127.0.0.1:5010 run:APP --access-logfile /var/www/nacro/media/logs/xwl.me_access.log --error-logfile /var/www/nacro/media/logs/xwl.me_error.log
 
 
 cd "$ORIGINAL_DIR"

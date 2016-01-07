@@ -1,11 +1,11 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          <NAME>
+# Provides:          xwl
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Description:       <DESCRIPTION>
+# Description:       Xwl flask webapp
 ### END INIT INFO
 # The above is boilerplate I don't understand
 
@@ -13,17 +13,27 @@
 SCRIPT="/home/nacro/launchscripts/launch_whereisleland.sh"
 RUNAS="nacro"
 
-# PIDFILE=/var/run/xwl.pid
+PIDFILE=/var/run/xwl.pid
 # LOGFILE=/var/log/xwl.log
 
 start() {
+	if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE"); then
+		echo 'Service already running' >&2
+		return 1
+	fi
 	echo 'Starting service…' >&2
-	su -c "$SCRIPT" $RUNAS &
+	su -c "$SCRIPT" $RUNAS > "$PIDFILE" &
 	echo 'Service started' >&2
 }
 
 stop() {
-	echo 'Stopping of this service is not implemented. Please kill manually.'>&2
+	if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+		echo 'Service not running' >&2
+		return 1
+	fi
+	echo 'Stopping service...' >&2
+	pkill -P $(pgrep "$SCRIPT") && rm -f "$PIDFILE"
+	echo 'Service stopped' >&2
 }
 
 uninstall() {
