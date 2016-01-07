@@ -33,7 +33,7 @@ stop() {
 		return 1
 	fi
 	echo 'Stopping service...' >&2
-	pkill -P $(pgrep "$SCRIPT") && rm -f "$PIDFILE"
+	pkill -P $(pgrep -f "$SCRIPT") && rm -f "$PIDFILE"
 	echo 'Service stopped' >&2
 }
 
