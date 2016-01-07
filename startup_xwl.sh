@@ -14,7 +14,7 @@ SCRIPT="/home/nacro/launchscripts/launch_xwl.sh"
 RUNAS="nacro"
 
 PIDFILE=/var/run/xwl.pid
-LOGFILE=/var/log/xwl.log
+#LOGFILE=/var/log/xwl.log
 
 start() {
 	if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE"); then
@@ -22,7 +22,7 @@ start() {
 		return 1
 	fi
 	echo 'Starting service…' >&2
-	local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
+	local CMD="$SCRIPT & echo \$!"
 	su -c "$CMD" $RUNAS > "$PIDFILE" &
 	echo 'Service started' >&2
 }
