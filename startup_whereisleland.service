@@ -1,0 +1,14 @@
+[Unit]
+Description=Launch Leland's whereis service
+SourcePath=/etc/init.d/startup_whereisleland
+After=network.target
+
+[Service]
+ExecStart=/etc/init.d/startup_whereisleland start
+ExecStop=/etc/init.d/startup_whereisleland stop
+Type=simple
+PIDFile=/var/run/whereisleland.service.pid
+
+[Install]
+WantedBy=default.target
+
