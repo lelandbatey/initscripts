@@ -7,31 +7,34 @@
 # Default-Stop:      0 1 6
 # Description:       <DESCRIPTION>
 ### END INIT INFO
-# The above is boilerplate I don't understand
 
 
-SCRIPT="/home/nacro/launchscripts/launch_whereisleland.sh"
-RUNAS="nacro"
+SCRIPT="/home/leland/projects/initscripts/launch_whereisleland.sh"
+RUNAS="leland"
 
-# PIDFILE=/var/run/whereisleland.pid
+PIDFILE=/var/run/whereisleland.pid
 # LOGFILE=/var/log/whereisleland.log
 
 start() {
+
+	if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE"); then
+		echo 'Service already running' >&2
+		return 1
+	fi
 	echo 'Starting service…' >&2
-	su -c "$SCRIPT" $RUNAS &
+	local CMD="$SCRIPT & echo \$!"
+	su -c "$CMD" $RUNAS > "$PIDFILE" &
 	echo 'Service started' >&2
 }
 
 stop() {
-	# if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
-	# 	echo 'Service not running' >&2
-	# 	return 1
-	# fi
-	# echo 'Stopping service…' >&2
-	# echo $(ps ax | grep "$SCRIPT" | head -n1 | cut -d' ' -f 1) >&2
-	# kill -15 $(ps ax | grep "$SCRIPT" | head -n1 | cut -d' ' -f 1) #&& rm -f "$PIDFILE"
-	# echo 'Service stopped' >&2
-	echo 'Stopping of this service is not implemented. Please kill manually.'>&2
+	if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+		echo 'Service not running' >&2
+		return 1
+	fi
+	echo 'Stopping service...' >&2
+	pkill -P $(pgrep -f "$SCRIPT") && rm -f "$PIDFILE"
+	echo 'Service stopped' >&2
 }
 
 uninstall() {

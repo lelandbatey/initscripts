@@ -6,9 +6,9 @@
 ORIGINAL_DIR="$(echo $PWD)"
 
 # Move to correct directory for this program
-cd "/var/www/leland/whereis/whereIAm"
+cd "/var/www/whereis.lelandbatey.com/whereIAm"
 
 # Launch with full paths and expansions
-/home/nacro/bin/venv/bin/python app.py
+/home/leland/bin/venv/bin/python app.py
 
 cd "$ORIGINAL_DIR"

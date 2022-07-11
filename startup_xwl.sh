@@ -11,7 +11,7 @@
 
 
 SCRIPT="/home/nacro/launchscripts/launch_xwl.sh"
-RUNAS="nacro"
+RUNAS="leland"
 
 PIDFILE=/var/run/xwl.pid
 #LOGFILE=/var/log/xwl.log
