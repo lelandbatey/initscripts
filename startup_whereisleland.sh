@@ -17,7 +17,7 @@ PIDFILE=/var/run/whereisleland.pid
 
 start() {
 
-	if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE"); then
+	if [ -f "$PIDFILE" ] && /bin/kill -0 $(cat "$PIDFILE"); then
 		echo 'Service already running' >&2
 		return 1
 	fi
@@ -28,7 +28,7 @@ start() {
 }
 
 stop() {
-	if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+	if [ ! -f "$PIDFILE" ] || ! /bin/kill -0 $(cat "$PIDFILE"); then
 		echo 'Service not running' >&2
 		return 1
 	fi
