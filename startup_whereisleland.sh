@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          <NAME>
 # Required-Start:    $local_fs $network $named $time $syslog
@@ -21,7 +21,7 @@ start() {
 		echo 'Service already running' >&2
 		return 1
 	fi
-	echo 'Starting service…' >&2
+	echo 'Starting service...' >&2
 	local CMD="$SCRIPT & echo \$!"
 	su -c "$CMD" $RUNAS > "$PIDFILE" &
 	echo 'Service started' >&2
