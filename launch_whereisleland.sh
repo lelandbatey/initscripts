@@ -9,6 +9,6 @@ ORIGINAL_DIR="$(echo $PWD)"
 cd "/var/www/whereis.lelandbatey.com/whereIAm"
 
 # Launch with full paths and expansions
-/home/leland/bin/venv-3/bin/python run.py
+nohup /home/leland/bin/venv-3/bin/python run.py </dev/null &>> whereis_access.log
 
 cd "$ORIGINAL_DIR"
