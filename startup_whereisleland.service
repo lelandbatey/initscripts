@@ -6,7 +6,7 @@ After=network.target
 [Service]
 ExecStart=/etc/init.d/startup_whereisleland start
 ExecStop=/etc/init.d/startup_whereisleland stop
-Type=simple
+Type=forking
 PIDFile=/var/run/whereisleland.pid
 
 [Install]
