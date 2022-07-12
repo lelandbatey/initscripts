@@ -9,6 +9,6 @@ ORIGINAL_DIR="$(echo $PWD)"
 cd "/var/www/whereis.lelandbatey.com/whereIAm"
 
 # Launch with full paths and expansions
-/home/leland/bin/venv/bin/python app.py
+/home/leland/bin/venv-3/bin/python run.py
 
 cd "$ORIGINAL_DIR"
